@@ -354,7 +354,9 @@ public class FlutterAppauthPlugin implements FlutterPlugin, MethodCallHandler, P
         if (tokenRequestParameters.scopes != null) {
             builder.setScopes(tokenRequestParameters.scopes);
         }
-
+        if (tokenRequestParameters.nonce != null) {
+            builder.setNonce(tokenRequestParameters.nonce);
+        }
         if (tokenRequestParameters.additionalParameters != null && !tokenRequestParameters.additionalParameters.isEmpty()) {
             builder.setAdditionalParameters(tokenRequestParameters.additionalParameters);
         }
