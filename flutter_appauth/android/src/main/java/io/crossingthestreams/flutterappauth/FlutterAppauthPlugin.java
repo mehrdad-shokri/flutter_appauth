@@ -216,6 +216,7 @@ public class FlutterAppauthPlugin implements FlutterPlugin, MethodCallHandler, P
         final String discoveryUrl = (String) arguments.get("discoveryUrl");
         final String redirectUrl = (String) arguments.get("redirectUrl");
         final String grantType = (String) arguments.get("grantType");
+        final String nonce = (String) arguments.get("nonce");
         clientSecret = (String) arguments.get("clientSecret");
         String refreshToken = null;
         if (arguments.containsKey("refreshToken")) {
@@ -233,7 +234,7 @@ public class FlutterAppauthPlugin implements FlutterPlugin, MethodCallHandler, P
         final Map<String, String> serviceConfigurationParameters = (Map<String, String>) arguments.get("serviceConfiguration");
         final Map<String, String> additionalParameters = (Map<String, String>) arguments.get("additionalParameters");
         allowInsecureConnections = (boolean) arguments.get("allowInsecureConnections");
-        return new TokenRequestParameters(clientId, issuer, discoveryUrl, scopes, redirectUrl, refreshToken, authorizationCode, codeVerifier, grantType, serviceConfigurationParameters, additionalParameters);
+        return new TokenRequestParameters(clientId, issuer, discoveryUrl, scopes, redirectUrl, refreshToken, authorizationCode, codeVerifier, grantType, serviceConfigurationParameters, additionalParameters, nonce);
     }
 
     @SuppressWarnings("unchecked")
@@ -574,8 +575,9 @@ public class FlutterAppauthPlugin implements FlutterPlugin, MethodCallHandler, P
         final String authorizationCode;
         final Map<String, String> serviceConfigurationParameters;
         final Map<String, String> additionalParameters;
+        final String nonce;
 
-        private TokenRequestParameters(String clientId, String issuer, String discoveryUrl, ArrayList<String> scopes, String redirectUrl, String refreshToken, String authorizationCode, String codeVerifier, String grantType, Map<String, String> serviceConfigurationParameters, Map<String, String> additionalParameters) {
+        private TokenRequestParameters(String clientId, String issuer, String discoveryUrl, ArrayList<String> scopes, String redirectUrl, String refreshToken, String authorizationCode, String codeVerifier, String grantType, Map<String, String> serviceConfigurationParameters, Map<String, String> additionalParameters, String nonce) {
             this.clientId = clientId;
             this.issuer = issuer;
             this.discoveryUrl = discoveryUrl;
@@ -587,6 +589,7 @@ public class FlutterAppauthPlugin implements FlutterPlugin, MethodCallHandler, P
             this.grantType = grantType;
             this.serviceConfigurationParameters = serviceConfigurationParameters;
             this.additionalParameters = additionalParameters;
+            this.nonce = nonce;
         }
     }
 
